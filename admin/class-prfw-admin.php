@@ -45,6 +45,8 @@ if ( !class_exists( 'prfw_Admin' ) ) {
 
           $this->plugin_name = $plugin_name;
           $this->version = $version;
+
+          
           
       }
 
@@ -74,6 +76,7 @@ if ( !class_exists( 'prfw_Admin' ) ) {
         //if( empty( $hook ) ) $hook = bp_core_do_network_admin() ? str_replace( '-network', '', get_current_screen()->id ) : get_current_screen()->id;
         $screen = get_current_screen();
         $pageName = str_replace('woocommerce_page_prfw_', '', $screen->id);
+        $pageName = str_replace('woocommerce_page_', '', $pageName);
         $pageName = str_replace('toplevel_page_prfw_', '', $pageName);
         $this->pageName = str_replace('admin_page_prfw_', '', $pageName);
 
@@ -81,7 +84,7 @@ if ( !class_exists( 'prfw_Admin' ) ) {
           add_thickbox();
           wp_enqueue_script('jquery-ui-datepicker');
           wp_enqueue_script( 'prfwmain', PRFW_BASE_URL . 'admin/assets/js/main.js', array( 'jquery' ), $this->version, true );
-          wp_enqueue_script( 'vue', PRFW_BASE_URL . 'admin/assets/js/vue.min.js', array( ), $this->version, false );
+          wp_enqueue_script( 'vue', PRFW_BASE_URL . 'admin/assets/js/vue.js', array( ), $this->version, false );
           wp_enqueue_script( 'vuepage', PRFW_BASE_URL . 'admin/assets/js/pages/'.$this->pageName.'.js', array( 'vue', 'prfwmain' ), $this->version, true );
           if(in_array($this->pageName, array('dashboard'))) {
             wp_enqueue_script( 'table2csv', PRFW_BASE_URL . 'admin/assets/js/jquery.tabletoCSV.js', array( 'jquery' ), $this->version, false );
@@ -108,8 +111,10 @@ if ( !class_exists( 'prfw_Admin' ) ) {
        */
       public function pageDisplay() {
 
+        
+
         $handlers = array(
-          'dashboard'=>'orders',
+          'dashboard'=>'handler',
         );
 
         $processes = array(

@@ -3,7 +3,7 @@ var app = new Vue({
 	data: {
 		orders: [],
 		totals: [],
-		filters: {datestart:'', dateend:'', totalthan: 'greater', total:0, datetype:'date_created', gateway:'', status: 'all'},
+		filters: {datestart:'', dateend:'', status: 'all'},
 		currencySymbol: '',
 	},
 	mounted: function() {
@@ -15,11 +15,18 @@ var app = new Vue({
 	methods: {
 		getOrders: function() {
 			var self = this;
-			prfw.xhr({handler:'orders', process:'getOrders', filters: JSON.stringify(this.filters)}, function (data) { 
+			prfw.xhr({handler:'handler', process:'getPendingOrders', filters: JSON.stringify(this.filters)}, function (data) { 
 				self.filters = data.payload.filters;
 				self.orders = data.payload.orders;
 				self.totals = data.payload.totals;
 			});
+		},
+		sendReminder: function(oid) {
+			prfw.xhr({handler:'handler', process:'sendReminder', oid: oid}, function (data) { 
+			});
+		},
+		cancelTheOrder: function(oid) {
+
 		},
 		filterOrders: function() {
 			if(!prfw.validateForm('form-filter')) { return false; }
@@ -37,6 +44,13 @@ var app = new Vue({
 		floatFix: function(val) {
 			if(!val) { return ''; }
 			return parseFloat(val).toFixed(2);
+		},
+		getTotal: function() {
+			
+		},
+		formatDate: function(ut, type) {
+			if(!ut) return '';
+			return prfw.formatDate(ut, type);
 		}
 	},
 	created() {

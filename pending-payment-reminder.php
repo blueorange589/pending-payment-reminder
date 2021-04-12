@@ -116,6 +116,15 @@ if (prfw_is_woocommerce_activated()) {
   }
 
   /**
+   * Register pending payment type of emails
+   */
+  add_filter( 'woocommerce_email_classes', function($emails) {
+    require_once PRFW_PLUGIN_DIR.'emails/class-wc-customer-pending-payment.php';
+    $emails['WC_Customer_Pending_Payment'] = new WC_Customer_Pending_Payment();
+    return $emails;
+  }, 90, 1 );
+
+  /**
    * Handle AJAX requests
    */
   add_action( 'wp_ajax_prfw', 'prfw_ajax_request' );
@@ -129,8 +138,6 @@ if (prfw_is_woocommerce_activated()) {
       wp_die();
     }
   }
-
-
 
   /**
    * Load Pending Payment Reminder for WooCommerce
@@ -146,6 +153,9 @@ if (prfw_is_woocommerce_activated()) {
       }
     }
   }, 30 );
+
+
+  
 
 } else {
   add_action( 'admin_notices', 'prfw_need_woocommerce' );

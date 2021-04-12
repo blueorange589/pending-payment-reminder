@@ -19,46 +19,43 @@
 						<tr>
 							<th><?php _e( 'ID', 'prfw' ); ?></th>
 							<th><?php _e('Date created', 'prfw'); ?></th>
+							<th><?php _e('Total', 'prfw'); ?> ({{currencySymbol}})</th>
 							<th><?php _e('Status', 'prfw'); ?></th>
 							<th><?php _e('Payment Method', 'prfw'); ?></th>
 							<th><?php _e('Customer', 'prfw'); ?></th>
+							<th><?php _e('Email', 'prfw'); ?></th>
 							<th><?php _e('Country', 'prfw'); ?></th>
-							<th class="tar"><?php _e('Tax', 'prfw'); ?> ({{currencySymbol}})</th>
-							<th class="tar"><?php _e('Shipping', 'prfw'); ?> ({{currencySymbol}})</th>
-							<th class="tar"><?php _e('Shipping Tax', 'prfw'); ?> ({{currencySymbol}})</th>
-							<th class="tar"><?php _e('Subtotal', 'prfw'); ?> ({{currencySymbol}})</th>
-							<th class="tar"><?php _e('Total', 'prfw'); ?> ({{currencySymbol}})</th>
+							<th><?php _e('Last Reminder', 'prfw'); ?></th>
+							<th class="tar"><?php _e('Actions', 'prfw'); ?></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(order, index) in orders">
 							<td><a :href="order.url" target="_blank">#{{order.id}}</a></td>
 							<td>{{order.date}}</td>
+							<td>{{floatFix(order.total)}}</td>
 							<td>{{printStatus(order.status)}}</td>
 							<td>{{order.pm}}</td>
 							<td>{{order.cus}}</td>
+							<td>{{order.email}}</td>
 							<td>{{order.geo}}</td>
-							<td class="tar">{{floatFix(order.tax)}}</td>
-							<td class="tar">{{floatFix(order.shipamount)}}</td>
-							<td class="tar">{{floatFix(order.shiptax)}}</td>
-							<td class="tar">{{floatFix(order.st)}}</td>
-							<td class="tar">{{floatFix(order.total)}}</td>
+							<td>{{formatDate(order.lastReminder, 'dayhour')}}</td>
+							<td class="tar">
+								<a @click="sendReminder(order.id)"><img src="<?php echo PRFW_BASE_URL; ?>admin/assets/img/paper-plane.svg" class="icon-xs" title="Send reminder email"></a>
+								<a @click="cancelTheOrder(order.id)"><img src="<?php echo PRFW_BASE_URL; ?>admin/assets/img/cross.svg" class="icon-xs" title="Cancel the order"></a>
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
 							<th class="tal b"><?php _e('Totals', 'prfw'); ?></th>
 							<th colspan="5">
-							<th>{{floatFix(totals.tax)}}</th>
-							<th>{{floatFix(totals.shipamount)}}</th>
-							<th>{{floatFix(totals.shiptax)}}</th>
-							<th>{{floatFix(totals.st)}}</th>
-							<th class="b">{{floatFix(totals.total)}}</th>
+							<th class="b">{{getTotal()}}</th>
 						</tr>
 					</tfoot>
 				</table>
 			</div>
 		</div>
-		
+
 	</div>
 </div>
