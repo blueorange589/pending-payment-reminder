@@ -35,6 +35,7 @@ var app = new Vue({
 			jQuery(".fin-table").tableToCSV();
 		},
 		floatFix: function(val) {
+			if(!val) { return ''; }
 			return parseFloat(val).toFixed(2);
 		}
 	},
