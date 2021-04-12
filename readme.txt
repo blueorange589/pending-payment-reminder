@@ -63,4 +63,4 @@ Installation
  * Click Download and download .zip file to your computer.
  * Unzip your downloaded .zip file to a local folder.
  * Using an FTP client, upload your local folder contents into your WordPress installation’s /wp-content/plugins directory (e.g. /wp-content/plugins/order-reports)
- * Visit Plugins page on your WordPress Admin and click Activate for "Order Reports for WooCommerce"" plugin.
+ * Visit Plugins page on your WordPress Admin and click Activate for "Pending Payment Reminder for WooCommerce"" plugin.
