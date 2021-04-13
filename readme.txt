@@ -4,7 +4,7 @@ Tags: pending payment, payment reminder, email reminder
 Requires at least: 4.0
 Tested up to: 5.7
 Requires PHP: 5.4
-Stable tag: trunk
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Get a list of orders pending payment and send out a reminder email on a button c
 == Description ==
 An order can be remain unpaid due to technical issues site was experiencing or customer left the process. 
 Using the plugin, you can get a list of orders with pending payment status and send out a reminder email on a button click.
+
+"Pay Now" button is automatically added in emails sent out.
 
 Reminder email templates can be modified through
 * Settings > Emails > Payment Reminder
@@ -29,9 +31,13 @@ If you'd like to send out reminder emails through a 3rd party mailing solution, 
 
 If your site having orders with pending payment status on a regular basis, or if it's already have some from history, plugin would be a good fit for your site.
 
-== Screenshots ==
+= Is it only or pending orders? =
 
-1. List of orders with pending payment status
+Plugin lists orders with status 'on-hold' and 'pending' only. Asking for user confirmation, on-hold orders are converted to pending before sending out the email, so payment becomes available.
+
+== Screenshots ==
+1. Reminder email with "Pay Now" button.
+2. List of orders with pending payment status
 
 == Changelog ==
 

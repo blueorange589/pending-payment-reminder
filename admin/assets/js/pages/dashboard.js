@@ -21,9 +21,20 @@ var app = new Vue({
 				self.totals = data.payload.totals;
 			});
 		},
-		sendReminder: function(oid) {
-			prfw.xhr({handler:'handler', process:'sendReminder', oid: oid}, function (data) { 
-			});
+		sendReminder: function(oid, status) {
+			var self = this;
+			if(status=='pending'||status=='wc-pending') {
+				prfw.xhr({handler:'handler', process:'sendReminder', oid: oid}, function (data) { 
+					self.getOrders();
+				});
+			} else {
+				var r = confirm("Order status will be changed to 'Pending'. Do you confirm?");
+				if (r === true) {
+					prfw.xhr({handler:'handler', process:'sendReminder', oid: oid}, function (data) { 
+						self.getOrders();
+					});
+				}
+			}
 		},
 		cancelTheOrder: function(oid) {
 

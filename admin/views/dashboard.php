@@ -41,7 +41,7 @@
 							<td>{{order.geo}}</td>
 							<td>{{formatDate(order.lastReminder, 'dayhour')}}</td>
 							<td class="tar">
-								<a @click="sendReminder(order.id)"><img src="<?php echo PRFW_BASE_URL; ?>admin/assets/img/paper-plane.svg" class="icon-xs" title="Send reminder email"></a>
+								<a @click="sendReminder(order.id, order.status)"><img src="<?php echo PRFW_BASE_URL; ?>admin/assets/img/paper-plane.svg" class="icon-xs" title="Send reminder email"></a>
 								<a @click="cancelTheOrder(order.id)"><img src="<?php echo PRFW_BASE_URL; ?>admin/assets/img/cross.svg" class="icon-xs" title="Cancel the order"></a>
 							</td>
 						</tr>

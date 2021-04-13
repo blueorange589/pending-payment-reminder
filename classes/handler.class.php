@@ -118,6 +118,12 @@ if ( !class_exists( 'prfw_orders' ) ) {
 		}
 
 		function get_custom_email_html( $order, $heading = false, $mailer ) {
+			$paylink = $order->get_checkout_payment_url( $on_checkout = false );
+			add_action( 'woocommerce_email_customer_details', function ( $email_heading, $email ) use($paylink) {
+				echo '<div style="height:80px;text-align:center"><a href="'.$paylink.'" style="background-color:#44c767;border-radius:12px;border:1px solid #18ab29;display:inline-block;cursor:pointer;color:#fff;font-family:Arial;font-size:19px;font-weight:700;padding:12px 26px;text-decoration:none;text-shadow:0 1px 0 #2f6627">Pay Now</a></div>';
+			}, 10, 2 );
+	
+	
 
 			$template = 'emails/wc-customer-pending-payment.php';
 			$template_base  = PRFW_PLUGIN_DIR . 'templates/';
@@ -137,6 +143,10 @@ if ( !class_exists( 'prfw_orders' ) ) {
 			 // Get woocommerce mailer from instance
 			$mailer = WC()->mailer();
 			$order = wc_get_order($this->post['oid']);
+			$status = $order->get_status();
+			if(!in_array($status, array('pending', 'wc-pending'))) {
+				$order->update_status('pending');
+			}
 			$order_data = $order->get_data();
 			$customer = new WC_Customer($order_data['customer_id']);
 			$reminder = WC()->mailer()->get_emails()['WC_Customer_Pending_Payment'];
@@ -147,7 +157,16 @@ if ( !class_exists( 'prfw_orders' ) ) {
 			$headers = "Content-Type: text/html\r\n";
 
 			//send the email through wordpress
-			$mailer->send( $recipient, $subject, $content, $headers );
+			$send = $mailer->send( $recipient, $subject, $content, $headers );
+			if($send) {
+
+				add_post_meta( $this->post['oid'], 'last_reminder', time() );
+
+				$this->message = __( 'Email sent successfully', 'prfw' );
+				$this->success = true;
+			} else {
+				$this->message = __( 'Unable to send email', 'prfw' );
+			}
 		}
 
 		// TODO : option to cancel the order
@@ -175,7 +194,7 @@ if ( !class_exists( 'prfw_orders' ) ) {
 				$order_data = $order->get_data();
 				$cus = new WC_Customer($order_data['customer_id']);
 
-				$order_meta = get_post_meta($order->get_meta_data());
+				$order_meta = get_post_meta($order->get_id());
 				
 				$geo = $order_data['billing']['country'];
 				$gn = WC()->countries->countries[ $geo ];
@@ -192,7 +211,7 @@ if ( !class_exists( 'prfw_orders' ) ) {
 				$od['email'] = $cus->get_email();
 				$od['geo'] = $gn;
 				$od['total'] = $order_data['total'];
-				$od['lastReminder'] = isset($order_meta['lastReminder'])?$order_meta['lastReminder']:0;
+				$od['lastReminder'] = isset($order_meta['last_reminder'])?$order_meta['last_reminder']:0;
 				$list[] = $od;
 			}
 			return $list;
