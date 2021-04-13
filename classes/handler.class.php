@@ -170,8 +170,11 @@ if ( !class_exists( 'prfw_orders' ) ) {
 		}
 
 		// TODO : option to cancel the order
-		public function cancelTheOrder() {
-				
+		public function cancelOrder() {
+			$order = wc_get_order($this->post['oid']);
+			$order->update_status('cancelled');
+			$this->message = __( 'Order has been cancelled', 'prfw' );
+			$this->success = true;
 		}
 
 

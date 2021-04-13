@@ -31,9 +31,17 @@ If you'd like to send out reminder emails through a 3rd party mailing solution, 
 
 If your site having orders with pending payment status on a regular basis, or if it's already have some from history, plugin would be a good fit for your site.
 
+= How to send out reminders? =
+
+All you need is to click paper plane icon. Email with payment information should arrive in customer email box instantly.
+
 = Is it only or pending orders? =
 
 Plugin lists orders with status 'on-hold' and 'pending' only. Asking for user confirmation, on-hold orders are converted to pending before sending out the email, so payment becomes available.
+
+= How to know last time I sent payment reminder email? =
+
+Date information for last time you sent out payment reminder will be shown in "Last reminder" column.
 
 == Screenshots ==
 1. Reminder email with "Pay Now" button.

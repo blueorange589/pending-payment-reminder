@@ -319,8 +319,8 @@ a{cursor: pointer;}
 	padding: 6px 1.4rem 0px;
 }
 
-.fin-table > tfoot th{font-size:0.86rem;text-align: right;}
-.fin-table > tfoot th:first-child{text-align: left;}
+.fin-table > tfoot th{font-size:0.86rem;text-align: right;background-color: antiquewhite;}
+.fin-table > tfoot th{text-align: left;}
 .fin-table.fin-table-thin td, .fin-table.fin-table-thin th{padding: .6rem .6rem;}
 
 .summary{

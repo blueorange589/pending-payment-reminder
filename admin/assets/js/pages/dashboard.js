@@ -5,6 +5,7 @@ var app = new Vue({
 		totals: [],
 		filters: {datestart:'', dateend:'', status: 'all'},
 		currencySymbol: '',
+		rowsTotal: 0
 	},
 	mounted: function() {
 		this.currencySymbol = prfw.symbol;
@@ -19,6 +20,7 @@ var app = new Vue({
 				self.filters = data.payload.filters;
 				self.orders = data.payload.orders;
 				self.totals = data.payload.totals;
+				self.rowsTotal = self.orders.reduce((a, b) => a + (parseFloat(b.total) || 0), 0);
 			});
 		},
 		sendReminder: function(oid, status) {
@@ -36,8 +38,14 @@ var app = new Vue({
 				}
 			}
 		},
-		cancelTheOrder: function(oid) {
-
+		cancelOrder: function(oid) {
+			var self = this;
+			var r = confirm("Order will be cancelled. are you sure?");
+			if (r === true) {
+				prfw.xhr({handler:'handler', process:'cancelOrder', oid: oid}, function (data) { 
+					self.getOrders();
+				});
+			}
 		},
 		filterOrders: function() {
 			if(!prfw.validateForm('form-filter')) { return false; }
@@ -57,7 +65,6 @@ var app = new Vue({
 			return parseFloat(val).toFixed(2);
 		},
 		getTotal: function() {
-			
 		},
 		formatDate: function(ut, type) {
 			if(!ut) return '';
