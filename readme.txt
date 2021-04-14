@@ -22,7 +22,7 @@ Reminder email templates can be modified through
 If you'd like to send out reminder emails through a 3rd party mailing solution, you can also export list of pending payment orders to CSV.
 
 == Features ==
-* Standard Email Integration
+* Email Integration
 * CSV Exports
 
 == Frequently Asked Questions ==
@@ -49,7 +49,7 @@ Date information for last time you sent out payment reminder will be shown in "L
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial release
 
 
