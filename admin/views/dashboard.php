@@ -54,6 +54,7 @@
 						</tr>
 					</tfoot>
 				</table>
+				<div class="mt8">Manage store finances right from WordPress dashboard. Check our <a href="https://finpose.com?utm_source=prfw&utm_medium=plugins" target="_blank">accounting plugin for WooCommerce <span class="dashicons dashicons-external"></span> </a></div>
 			</div>
 		</div>
 
