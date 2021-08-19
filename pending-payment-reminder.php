@@ -29,7 +29,7 @@ along with Pending Payment Reminder for WooCommerce. If not, see {URI to Plugin 
  * @wordpress-plugin
  * Plugin Name:       Pending Payment Reminder for WooCommerce
  * Description:       List orders with pending payment status and send out a reminder email on a button click.
- * Version:           1.0.0
+ * Version:           1.0.1
  * WC requires at least:  3.0.0
  * WC tested up to:       5.0.0
  * Author:            Finpose
@@ -44,7 +44,7 @@ along with Pending Payment Reminder for WooCommerce. If not, see {URI to Plugin 
 if ( ! defined( 'WPINC' ) ) { die; }
 
 
-define( 'PRFW_VERSION', '1.0.0' );
+define( 'PRFW_VERSION', '1.0.1' );
 define( 'PRFW_DBVERSION', '1.0.0' );
 define( 'PRFW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PRFW_BASE_URL', plugin_dir_url( __FILE__ ) );

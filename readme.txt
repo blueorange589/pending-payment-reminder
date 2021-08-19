@@ -49,6 +49,9 @@ Date information for last time you sent out payment reminder will be shown in "L
 
 == Changelog ==
 
+= 1.0.1 =
+* Added translation file
+
 = 1.0.0 =
 * Initial release
 
